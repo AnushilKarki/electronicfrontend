@@ -16,23 +16,6 @@
 
 </head>
 <style>
-    
-.zoom-img {
-  width: 300px;
-  height: 200px;
-  overflow: hidden;
-}
-
-.zoom-img > img {  
-  object-fit: cover;
-	width: 100%;
-	height: 100%;
-  transition: all .3s ease-in-out;
-}
-
-.zoom-img:hover > img {
-  transform: scale(1.2);
-}
     .dropbtn {
   background-color:linear-gradient(var(--blue), blueviolet);
   color: rgb(240, 240, 240);
@@ -104,7 +87,17 @@
                 <div class="dropdown-content">
                   <a href="#">Link 1</a>
 
-               
+                  <a href="#">Link 2</a>
+                  <div class="dropdown">
+                    <button class="dropbtn">Dropdown</button>
+                    <div class="dropdown-content">
+                      <a href="#">Link 1</a>
+    
+                      <a href="#">Link 2</a>
+                      <a href="#">Link 3</a>
+                    </div>
+                  </div> 
+                  <a href="#">Link 3</a>
                 </div>
               </div> 
               <div class="dropdown">
@@ -450,51 +443,8 @@
 <!-- arrival section ends -->
 
 
-<!-- featured section starts  -->
 
-<section class="feature" id="featured">
 
-<h1 class="heading"> <span> featured product </span> </h1>
-
-<div class="row">
-
-    <div class="image-container">
-
-        <div class="big-image">
-            <img src="images/watch1.jpg" alt="">
-        </div>
-  
-        <div class="small-image">
-            <img class="image-active" src="images/watch1.jpg" alt="">
-            <img src="images/watch2.jpg" alt="">
-            <img src="images/watch3.jpg" alt="">
-            <img src="images/watch4.jpg" alt="">
-        </div>
-
-    </div>
-
-    <div class="content">
-
-        <h3>smart watches</h3>
-        <div class="stars">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <span>(500+) reviews</span>
-        </div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, at!</p>
-        <strong class="price">₹1000 <span>₹1500</span> </strong>
-        <a href="#"><button class="btn">buy now</button></a>
-
-    </div>
-
-</div>
-
-</section>
-
-<!-- featured section ends -->
 
 <!-- gallery section starts  -->
 

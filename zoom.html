@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="images/arr_img2.jpg"><img src="images/arr_img2.jpg" alt="" /></a>		
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.dimension.js"></script>
+    
+    //optional
+    <script type="text/javascript" src="js/jquery.shadow.js"></script>
+    <script type="text/javascript" src="js/jquery.ifixpng.js"></script>
+    
+    //the plugin it self
+    <script type="text/javascript" src="js/jquery.fancyzoom.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            //Set the default directory to find the images needed
+            //by the plugin (closebtn.png, blank.gif, loading images ....)
+            $.fn.fancyzoom.defaultsOptions.imgDir='../images/'; //very important must finish with a /
+        
+            // Select all links in object with gallery ID using the defaults options
+            $('#gallery a').fancyzoom(); 
+        
+            // Select all links with tozoom class, set the open animation time to 1000
+            $('a.tozoom').fancyzoom({Speed:1000});
+        
+            // Select all links set the overlay opacity to 80%
+            $('a').fancyzoom({overlay:0.8});
+            
+            //new rev > 1.2
+            //apply fancyzoom effect on all image whose class is fancyzoom !!
+            $('img.fancyzoom').fancyzoom();
+        
+        
+        });
+        </script>
+</body>
+</html>

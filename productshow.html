@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Project</title>
+
+    <!-- owl carousel css file cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/styleHome.css">
+
+</head>
+<style>
+    .dropbtn {
+  background-color:linear-gradient(var(--blue), blueviolet);
+  color: rgb(240, 240, 240);
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: fixed;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #1d599182;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #1d599182;}
+</style>
+<body>
+
+<!-- header section starts  -->
+
+<header>
+
+<div class="header-1">
+
+    <a href="#" class="logo"> <i class="fas fa-shopping-bag"></i>  shopping </a>
+
+    <div class="form-container">
+        <form action="">
+            <input type="search" placeholder="search products" id="search" /> 
+            <label for="search" class="fas fa-search"></label>
+        </form>
+    </div>
+
+</div>
+
+<div class="header-2">
+
+    <div id="menu" class="fas fa-bars"></div>
+
+    <nav class="navbar" id="dropdown">
+        <ul>
+            <div class="dropdown">
+                <button class="dropbtn">Shop's</button>
+                <div class="dropdown-content">
+                  <a href="#">Link 1</a>
+
+                  <a href="#">Link 2</a>
+                  <div class="dropdown">
+                    <button class="dropbtn">Dropdown</button>
+                    <div class="dropdown-content">
+                      <a href="#">Link 1</a>
+    
+                      <a href="#">Link 2</a>
+                      <a href="#">Link 3</a>
+                    </div>
+                  </div> 
+                  <a href="#">Link 3</a>
+                </div>
+              </div> 
+              @foreach($categories as $category)
+              <div class="dropdown">
+                <button class="dropbtn">{{ $category->name }}</button>
+              
+                <div class="dropdown-content">
+                    @php
+                    $children = TCG\Voyager\Models\Category::where('parent_id', $category->id)->get();
+                @endphp
+                @if($children->isNotEmpty())
+@foreach($children as $child)
+                  <a href="#">{{ $child->name }}</a>
+
+           @endforeach
+           @endif
+           @php
+           $grandChild = TCG\Voyager\Models\Category::where('parent_id', $child->id)->get();
+       @endphp
+       @if($grandChild->isNotEmpty())
+                  <div class="dropdown">
+                    
+                   
+                    <div class="dropdown-content">
+                        @foreach($grandchild as $grand)
+                      <a href="#">{{ $grand->name }}</a>
+    @endforeach
+    @endif
+                    
+                    </div>
+                  </div> 
+                  <a href="#">Link 3</a>
+                </div>
+              </div> 
+              @endforeach
+          
+        
+    </nav>
+
+    <div class="icons">
+        <a href="#" class="fas fa-heart"></a>
+        <a href="#" class="fas fa-shopping-cart"></a>
+        <a href="#" class="fas fa-user"></a>
+    </div>
+
+</div>
+
+</header>
+<a href="images/g_img1.jpg"><img src="images/g_img1.jpg" alt="" /></a>			
+<!-- header section ends -->
+<section class="feature" id="featured">
+
+    <h1 class="heading"> <span> featured product </span> </h1>
+    @foreach ($products as $product)
+    <div class="row">
+    
+        <div class="image-container">
+    
+            <div class="big-image">
+            <img src="{{asset('storage/'.$product->image)}}" class="img-responsive">
+            </div>
+    
+    
+            @if($product->product_images != null)
+         @foreach(json_decode($product->product_images) as $images)
+            <div class="small-image">
+                <img src="{{ Voyager::image( $images ) }}" alt="">
+        
+            </div>
+         @endforeach
+         @endif
+        </div>
+    
+        <div class="content">
+    
+            <h3>{{$product->name}}</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <span>Rating</span>
+            </div>
+            <p>{{ $product->description }}</p>
+            <strong class="price"><span>{{ $product->selling_price }}</span> </strong>
+            <a class="fas fa-shopping-cart" href="{{route('cart.add', $product->id)}}"><button class="btn">add to cart</button></a>
+    
+        </div>
+    
+    </div>
+    @endforeach
+    </section>
+    
+<!-- home section starts  -->
+
+<!-- home section ends -->
+
+<!-- arrival section starts  -->
+
+
+<!-- deal section ends -->
+
+<!-- newsletter section starts  -->
+
+
+<!-- newsletter section ends -->
+
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <a href="#" class="logo"> <i class="fas fa-shopping-bag"></i>  shopping </a>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique expedita molestiae distinctio facere beatae velit, maiores ullam molestias necessitatibus sapiente.</p>
+        </div>
+
+        <div class="box">
+            <h3>links</h3>
+            <a href="#">home</a>
+            <a href="#">arrival</a>
+            <a href="#">featured</a>
+            <a href="#">gallery</a>
+            <a href="#">deal</a>
+        </div>
+
+        <div class="box">
+            <h3>contact us</h3>
+            <p> <i class="fas fa-home"></i>
+                mumbai, maharashtra, 
+                india - 400104
+            </p>
+            <p> <i class="fas fa-phone"></i>
+                +910000000
+            </p>
+            <p> <i class="fas fa-globe"></i>
+                xyz@yoursite.com
+            </p>
+        </div>
+
+    </div>
+
+<h1 class="credit"> created by <span>mr. web designer</span> | all rights reserved. </h1>
+
+</section>
+
+<!-- footer section ends -->
+
+
+
+
+
+
+<script type="text/javascript">
+    $(function() {
+        //Set the default directory to find the images needed
+        //by the plugin (closebtn.png, blank.gif, loading images ....)
+        $.fn.fancyzoom.defaultsOptions.imgDir='../images/'; //very important must finish with a /
+    
+        // Select all links in object with gallery ID using the defaults options
+        $('#gallery a').fancyzoom(); 
+    
+        // Select all links with tozoom class, set the open animation time to 1000
+        $('a.tozoom').fancyzoom({Speed:1000});
+    
+        // Select all links set the overlay opacity to 80%
+        $('a').fancyzoom({overlay:0.8});
+        
+        //new rev > 1.2
+        //apply fancyzoom effect on all image whose class is fancyzoom !!
+        $('img.fancyzoom').fancyzoom();
+    
+    
+    });
+    </script>
+//required
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.dimension.js"></script>
+
+//optional
+<script type="text/javascript" src="js/jquery.shadow.js"></script>
+<script type="text/javascript" src="js/jquery.ifixpng.js"></script>
+
+//the plugin it self
+<script type="text/javascript" src="js/jquery.fancyzoom.js"></script>
+
+
+
+<!-- jquery cdn link  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- owl carousel js file cdn link  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="js/home.js"></script>
+    
+</body>
+</html>
